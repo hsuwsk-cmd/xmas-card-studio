@@ -376,6 +376,25 @@
                         <i class="fa-solid fa-wand-magic-sparkles text-yellow-300 text-xl"></i>
                         <span>施展魔法！生成聖誕卡</span>
                     </button>
+
+<!-- 前往外部 AI 工具 -->
+<div class="grid grid-cols-2 gap-2 mt-3">
+  <button onclick="openExternalAI('gemini')"
+          class="btn-bounce bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow flex items-center justify-center gap-2 text-xs sm:text-sm">
+    <i class="fa-solid fa-sparkles"></i> 前往 Gemini 畫卡
+  </button>
+
+  <button onclick="openExternalAI('copilot')"
+          class="btn-bounce bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 rounded-xl shadow flex items-center justify-center gap-2 text-xs sm:text-sm">
+    <i class="fa-solid fa-robot"></i> 前往 Copilot 畫卡
+  </button>
+</div>
+
+<p id="external-ai-status" class="text-xs text-emerald-700 font-bold mt-2 text-center"></p>
+<p class="text-[11px] text-slate-500 mt-1 text-center">
+  按下後會複製你的 Prompt，並開啟 AI 繪圖工具；請貼上 Prompt 後生成聖誕卡。
+</p>
+
                 </div>
 
                 <!-- 聖誕卡結果顯示區域 -->
@@ -399,7 +418,7 @@
                             <div class="text-5xl mb-2">⛄💦</div>
                             <p class="font-bold text-red-600 text-base">魔法暫時沒有施展成功</p>
                             <p id="error-detail-text" class="text-xs text-slate-600 mt-2 bg-white p-2.5 rounded-xl border border-red-200 break-all max-w-full"></p>
-                            <p class="text-[11px] text-slate-400 mt-2">請老師檢查 API Key 是否為 AIzaSy 開頭喔！</p>
+                            <p class="text-[11px] text-slate-400 mt-2">請確認網絡連線、API Key 權限或稍後再試喔！</p>
                         </div>
 
                         <!-- 載入中狀態 -->
@@ -762,7 +781,36 @@
             recognition.start();
         }
 
-        // 呼叫 Gemini Image API 生成卡片
+        function openExternalAI(tool) {
+            const promptText = currentEnglishPrompt || '';
+            const status = document.getElementById('external-ai-status');
+
+            if (!promptText.trim()) {
+                status.innerText = '⚠️ 請先完成 Prompt 選擇！';
+                return;
+            }
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(promptText)
+                    .then(() => {
+                        status.innerText = '✅ Prompt 已複製！請貼到 AI 工具並生成圖片。';
+                    })
+                    .catch(() => {
+                        status.innerText = '⚠️ 無法自動複製，請手動選取並複製 Prompt。';
+                    });
+            } else {
+                status.innerText = '⚠️ 此瀏覽器不支援自動複製，請手動複製 Prompt。';
+            }
+
+            const urls = {
+                gemini: 'https://gemini.google.com/',
+                copilot: 'https://copilot.microsoft.com/'
+            };
+
+            window.open(urls[tool], '_blank', 'noopener,noreferrer');
+        }
+
+// 純淨使用 Google Gemini / Imagen API 生成卡片
         async function generateXmasCard() {
             const currentApiKey = getApiKey();
             if (!currentApiKey) {
