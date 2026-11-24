@@ -391,6 +391,14 @@
                             <p class="text-xs text-slate-400 mt-1">你的專屬聖誕畫作就會顯示在這裡喔！</p>
                         </div>
 
+                        <!-- 友善錯誤提示狀態 (取代 alert) -->
+                        <div id="error-state" class="hidden p-5 text-center flex flex-col items-center justify-center bg-red-50 w-full h-full">
+                            <div class="text-5xl mb-2">⛄💦</div>
+                            <p class="font-bold text-red-600 text-base">魔法暫時沒有施展成功</p>
+                            <p id="error-detail-text" class="text-xs text-slate-600 mt-2 bg-white p-2.5 rounded-xl border border-red-200 break-all max-w-full"></p>
+                            <p class="text-[11px] text-slate-400 mt-2">請老師檢查 API Key 是否為 AIzaSy 開頭喔！</p>
+                        </div>
+
                         <!-- 載入中狀態 -->
                         <div id="loading-state" class="hidden absolute inset-0 bg-white/90 backdrop-blur-sm flex flex-col items-center justify-center p-6 z-20">
                             <div class="w-16 h-16 border-4 border-red-200 border-t-red-600 rounded-full animate-spin mb-4"></div>
@@ -530,8 +538,8 @@
 
     <!-- 音效處理與系統邏輯 Script -->
     <script>
-        // 設定 API Key
-        const apiKey = "AQ.Ab8RN6Lp-bMDVfbQG-K6Pin39QW0OqObRgfTBIr5yrEMfKd2GQ";
+        // ⚠️ 您的 Google Gemini API Key
+        const apiKey = "AQ.Ab8RN6LU7Xs_yTKVCwJnmJ99uNSqIWKafPfSw4nokUBKfILLWg";
 
         // 當前遊戲關卡狀態
         let currentStep = 1;
@@ -671,39 +679,116 @@
         let recognition = null;
         function toggleVoiceInput() {
             if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                alert("您的瀏覽器暫時不支援語音辨識，請直接打字輸入喔！");
+                document.getElementById('voice-status').innerText = '⚠️ 此瀏覽器不支援語音輸入，請直接打字喔！';
                 return;
             }
 
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        // 呼叫 Gemini Image API 生成卡片
+        async function generateXmasCard() {
+            const promptText = currentEnglishPrompt;
+            
+            document.getElementById('placeholder-state').classList.add('hidden');
+            document.getElementById('error-state').classList.add('hidden');
+            document.getElementById('result-state').classList.add('hidden');
+            document.getElementById('loading-state').classList.remove('hidden');
+            document.getElementById('generate-btn').disabled = true;
 
-            if (!recognition) {
-                recognition = new SpeechRecognition();
-                recognition.lang = 'zh-HK'; // 廣東話語音辨識
-                recognition.continuous = false;
-                recognition.interimResults = false;
+            let lastErrorMessage = "未知錯誤";
+            let success = false;
 
-                recognition.onstart = function() {
-                    document.getElementById('mic-icon').className = 'fa-solid fa-spinner animate-spin text-base';
-                    document.getElementById('voice-status').innerText = '🎙️ 正在聆聽中...請說話...';
-                };
+            // 1. 嘗試 Gemini 系列生圖模型 (支援免費層級)
+            const geminiModels = [
+                'gemini-2.5-flash-image',
+                'gemini-3.1-flash-image',
+                'gemini-2.0-flash-exp-image-generation'
+            ];
 
-                recognition.onresult = function(event) {
-                    const transcript = event.results[0][0].transcript;
-                    const input = document.getElementById('custom-prompt-input');
-                    input.value = input.value ? input.value + ' ' + transcript : transcript;
-                    updatePromptBlocks();
-                };
+            const geminiPayload = {
+                contents: [{
+                    role: 'user',
+                    parts: [{ text: promptText }]
+                }],
+                generationConfig: {
+                    responseModalities: ['IMAGE']
+                }
+            };
 
-                recognition.onerror = function(event) {
-                    console.error("語音錯誤:", event.error);
-                };
+            for (const model of geminiModels) {
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey.trim()}`;
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(geminiPayload)
+                    });
 
-                recognition.onend = function() {
-                    document.getElementById('mic-icon').className = 'fa-solid fa-microphone text-base';
-                    document.getElementById('voice-status').innerText = '💡 點擊麥克風可以直接用語音說出想法喔！';
-                };
+                    const result = await response.json();
+
+                    if (!response.ok) {
+                        lastErrorMessage = result?.error?.message || `HTTP 錯誤碼: ${response.status}`;
+                        console.warn(`${model} 失敗:`, lastErrorMessage);
+                        // 若明確是 API Key 無效，直接中斷不再重試其他模型
+                        if (lastErrorMessage.includes('API key not valid') || response.status === 400 && lastErrorMessage.includes('API_KEY_INVALID')) {
+                            break;
+                        }
+                        continue;
+                    }
+
+                    const part = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+                    if (part && part.inlineData) {
+                        const imageUrl = `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
+                        showGeneratedImage(imageUrl);
+                        success = true;
+                        break;
+                    }
+                } catch (error) {
+                    lastErrorMessage = error.message;
+                }
             }
+
+            // 2. 若 Gemini 模型皆未成功，備用嘗試 Imagen 3 模型
+            if (!success && !lastErrorMessage.includes('API key not valid')) {
+                try {
+                    const imagenUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey.trim()}`;
+                    const imagenRes = await fetch(imagenUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            instances: [{ prompt: promptText }],
+                            parameters: { sampleCount: 1, aspectRatio: "3:4" }
+                        })
+                    });
+                    const imagenData = await imagenRes.json();
+                    if (imagenRes.ok && imagenData?.predictions?.[0]?.bytesBase64Encoded) {
+                        const imageUrl = `data:image/png;base64,${imagenData.predictions[0].bytesBase64Encoded}`;
+                        showGeneratedImage(imageUrl);
+                        success = true;
+                    } else if (imagenData?.error?.message) {
+                        lastErrorMessage = imagenData.error.message;
+                    }
+                } catch (e) {
+                    lastErrorMessage = e.message;
+                }
+            }
+
+            if (!success) {
+                document.getElementById('loading-state').classList.add('hidden');
+                document.getElementById('error-state').classList.remove('hidden');
+                document.getElementById('error-detail-text').innerText = `錯誤原因：${lastErrorMessage}`;
+            }
+
+            document.getElementById('generate-btn').disabled = false;
+        }
+
+        function showGeneratedImage(imageUrl) {
+            const imgEl = document.getElementById('generated-image');
+            imgEl.src = imageUrl;
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('result-state').classList.remove('hidden');
+            document.getElementById('card-tools').classList.remove('hidden');
+            playSuccessSound();
+        }
 
             recognition.start();
         }
