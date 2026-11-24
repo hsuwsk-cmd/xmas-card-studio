@@ -131,6 +131,9 @@
                 <button onclick="openPromptGuide()" class="bg-yellow-400 hover:bg-yellow-300 text-red-900 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-md transition flex items-center gap-1 border-2 border-white animate-bounce">
                     <i class="fa-solid fa-graduation-cap"></i> 🎓 成為 Prompt 達人小秘訣
                 </button>
+                <button onclick="openApiKeyModal()" class="bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold px-4 py-1.5 rounded-full text-sm shadow-md transition flex items-center gap-1 border-2 border-white">
+                    <i class="fa-solid fa-key"></i> 🔑 設定課堂魔法金鑰
+                </button>
             </div>
             <h1 class="text-3xl sm:text-5xl font-extrabold text-white font-pop tracking-wide drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
                 🎄 聖誕 AI 創卡魔法屋 🎅
@@ -536,10 +539,60 @@
         </div>
     </div>
 
+    <!-- 彈出視窗 3：課堂魔法金鑰 (API Key) 設定 Modal -->
+    <div id="apikey-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl border-4 border-emerald-400 max-w-md w-full p-6 relative shadow-2xl">
+            <button onclick="closeApiKeyModal()" class="absolute top-4 right-4 bg-slate-200 hover:bg-slate-300 rounded-full w-10 h-10 flex items-center justify-center font-bold text-slate-700">✕</button>
+            
+            <div class="text-center mb-4">
+                <span class="text-4xl">🔑</span>
+                <h2 class="text-xl font-extrabold text-emerald-700 mt-2">輸入課堂魔法金鑰 (API Key)</h2>
+                <p class="text-xs text-slate-500 mt-1">為了保護帳號安全，金鑰只會保存在這台電腦的瀏覽器中，不會公開上傳至網路！</p>
+            </div>
+
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-1">請貼上 Google AI Studio 金鑰 (AIzaSy 開頭)：</label>
+                    <input type="password" id="api-key-input" placeholder="AIzaSy..." class="w-full p-3 border-2 border-slate-300 rounded-xl text-sm font-mono focus:border-emerald-500 focus:outline-none">
+                </div>
+                <p id="apikey-status" class="text-xs font-bold text-emerald-600"></p>
+            </div>
+
+            <button onclick="saveApiKey()" class="w-full mt-5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow flex items-center justify-center gap-2">
+                <i class="fa-solid fa-check"></i> 儲存並開始使用
+            </button>
+        </div>
+    </div>
+
     <!-- 音效處理與系統邏輯 Script -->
     <script>
-        // ⚠️ 您的 Google Gemini API Key
-        const apiKey = "AQ.Ab8RN6LU7Xs_yTKVCwJnmJ99uNSqIWKafPfSw4nokUBKfILLWg";
+        // 從瀏覽器本地儲存讀取 API Key（絕不寫死在公開程式碼中）
+        function getApiKey() {
+            return localStorage.getItem('xmas_gemini_api_key') || '';
+        }
+
+        function openApiKeyModal() {
+            document.getElementById('api-key-input').value = getApiKey();
+            document.getElementById('apikey-status').innerText = getApiKey() ? '✅ 目前已儲存金鑰' : '';
+            document.getElementById('apikey-modal').classList.remove('hidden');
+        }
+
+        function closeApiKeyModal() {
+            document.getElementById('apikey-modal').classList.add('hidden');
+        }
+
+        function saveApiKey() {
+            const val = document.getElementById('api-key-input').value.trim();
+            if (!val) {
+                document.getElementById('apikey-status').innerText = '⚠️ 請輸入有效的金鑰！';
+                return;
+            }
+            localStorage.setItem('xmas_gemini_api_key', val);
+            document.getElementById('apikey-status').innerText = '✅ 儲存成功！';
+            setTimeout(() => {
+                closeApiKeyModal();
+            }, 600);
+        }
 
         // 當前遊戲關卡狀態
         let currentStep = 1;
@@ -684,8 +737,40 @@
             }
 
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!recognition) {
+                recognition = new SpeechRecognition();
+                recognition.lang = 'zh-HK';
+                recognition.interimResults = false;
+                recognition.onstart = () => {
+                    document.getElementById('mic-btn').classList.add('animate-pulse', 'bg-yellow-500');
+                    document.getElementById('voice-status').innerText = '🎙️ 正在聆聽中，請大聲說出你的想法...';
+                };
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript;
+                    const input = document.getElementById('custom-prompt-input');
+                    input.value = input.value ? `${input.value}，${transcript}` : transcript;
+                    updatePromptBlocks();
+                    document.getElementById('voice-status').innerText = `✅ 已加入語音內容：「${transcript}」`;
+                };
+                recognition.onerror = () => {
+                    document.getElementById('voice-status').innerText = '⚠️ 沒有聽清楚，請再試一次或直接打字喔！';
+                };
+                recognition.onend = () => {
+                    document.getElementById('mic-btn').classList.remove('animate-pulse', 'bg-yellow-500');
+                };
+            }
+            recognition.start();
+        }
+
         // 呼叫 Gemini Image API 生成卡片
         async function generateXmasCard() {
+            const currentApiKey = getApiKey();
+            if (!currentApiKey) {
+                openApiKeyModal();
+                document.getElementById('apikey-status').innerText = '⚠️ 請先在這裡輸入課堂魔法金鑰才能畫畫喔！';
+                return;
+            }
+
             const promptText = currentEnglishPrompt;
             
             document.getElementById('placeholder-state').classList.add('hidden');
@@ -697,11 +782,9 @@
             let lastErrorMessage = "未知錯誤";
             let success = false;
 
-            // 1. 嘗試 Gemini 系列生圖模型 (支援免費層級)
             const geminiModels = [
                 'gemini-2.5-flash-image',
-                'gemini-3.1-flash-image',
-                'gemini-2.0-flash-exp-image-generation'
+                'gemini-3.1-flash-image'
             ];
 
             const geminiPayload = {
@@ -715,7 +798,7 @@
             };
 
             for (const model of geminiModels) {
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey.trim()}`;
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${currentApiKey}`;
                 try {
                     const response = await fetch(apiUrl, {
                         method: 'POST',
@@ -727,9 +810,7 @@
 
                     if (!response.ok) {
                         lastErrorMessage = result?.error?.message || `HTTP 錯誤碼: ${response.status}`;
-                        console.warn(`${model} 失敗:`, lastErrorMessage);
-                        // 若明確是 API Key 無效，直接中斷不再重試其他模型
-                        if (lastErrorMessage.includes('API key not valid') || response.status === 400 && lastErrorMessage.includes('API_KEY_INVALID')) {
+                        if (lastErrorMessage.includes('API key not valid') || (response.status === 400 && lastErrorMessage.includes('API_KEY_INVALID'))) {
                             break;
                         }
                         continue;
@@ -747,10 +828,9 @@
                 }
             }
 
-            // 2. 若 Gemini 模型皆未成功，備用嘗試 Imagen 3 模型
             if (!success && !lastErrorMessage.includes('API key not valid')) {
                 try {
-                    const imagenUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey.trim()}`;
+                    const imagenUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${currentApiKey}`;
                     const imagenRes = await fetch(imagenUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -788,9 +868,6 @@
             document.getElementById('result-state').classList.remove('hidden');
             document.getElementById('card-tools').classList.remove('hidden');
             playSuccessSound();
-        }
-
-            recognition.start();
         }
 
         // Modal 相關控制
@@ -834,89 +911,6 @@
                 osc.start();
                 osc.stop(ctx.currentTime + 0.15);
             } catch (e) {}
-        }
-
-        // 呼叫 Gemini 3.1 Flash Image API 生成卡片
-        async function generateXmasCard() {
-            const promptText = currentEnglishPrompt;
-            
-            document.getElementById('placeholder-state').classList.add('hidden');
-            document.getElementById('result-state').classList.add('hidden');
-            document.getElementById('loading-state').classList.remove('hidden');
-            document.getElementById('generate-btn').disabled = true;
-
-            const payload = {
-                contents: [{
-                    role: 'user',
-                    parts: [{ text: promptText }]
-                }],
-                generationConfig: {
-                    responseModalities: ['IMAGE'],
-                    imageConfig: { aspectRatio: "4:5" }
-                }
-            };
-
-            // 優先使用 gemini-3.1-flash-image，若被限制則降級嘗試 gemini-3.1-flash-lite-image
-            const models = [
-                'gemini-3.1-flash-image',
-                'gemini-3.1-flash-lite-image'
-            ];
-
-            let success = false;
-
-            for (const model of models) {
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-                
-                try {
-                    const response = await fetchWithRetry(apiUrl, {
-                        method: 'POST',
-                        mode: 'cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    const result = await response.json();
-                    const part = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
-
-                    if (part && part.inlineData) {
-                        const imageUrl = `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
-                        const imgEl = document.getElementById('generated-image');
-                        imgEl.src = imageUrl;
-
-                        document.getElementById('loading-state').classList.add('hidden');
-                        document.getElementById('result-state').classList.remove('hidden');
-                        document.getElementById('card-tools').classList.remove('hidden');
-
-                        playSuccessSound();
-                        success = true;
-                        break; // 成功即跳出循環
-                    }
-                } catch (error) {
-                    console.warn(`使用 ${model} 生成失敗，嘗試下一個備用方案...`, error);
-                }
-            }
-
-            if (!success) {
-                alert("⚠️ 魔法生成遇到一點小問題：\n在 Google Sites 內嵌入時，可能是學校網絡或瀏覽器權限阻擋了外部圖片生成。\n建議點擊「全螢幕預覽」或在新分頁開啟使用喔！");
-                document.getElementById('loading-state').classList.add('hidden');
-                document.getElementById('placeholder-state').classList.remove('hidden');
-            }
-
-            document.getElementById('generate-btn').disabled = false;
-        }
-
-        async function fetchWithRetry(url, options, retries = 2, backoff = 1000) {
-            try {
-                const res = await fetch(url, options);
-                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-                return res;
-            } catch (err) {
-                if (retries > 0) {
-                    await new Promise(r => setTimeout(r, backoff));
-                    return fetchWithRetry(url, options, retries - 1, backoff * 2);
-                }
-                throw err;
-            }
         }
 
         function updateGreeting() {
