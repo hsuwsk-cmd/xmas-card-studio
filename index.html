@@ -153,11 +153,11 @@
                             <i class="fa-solid fa-wand-magic-sparkles text-yellow-500"></i> 第一步：選擇你的聖誕主角
                         </span>
                         <span id="step-counter" class="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                            第 1 / 5 關
+                            第 1 / 7 關
                         </span>
                     </div>
                     <div class="w-full bg-slate-200 h-4 rounded-full overflow-hidden border border-slate-300">
-                        <div id="progress-bar" class="bg-gradient-to-r from-yellow-400 to-red-500 h-full w-1/5 step-progress rounded-full"></div>
+                        <div id="progress-bar" class="bg-gradient-to-r from-yellow-400 to-red-500 h-full w-1/7 step-progress rounded-full"></div>
                     </div>
                 </div>
 
@@ -273,67 +273,39 @@
                         </div>
                     </div>
 
-                    <!-- Step 4: 畫風 -->
-                    <div id="step-4" class="step-panel hidden grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-                        <div onclick="selectOption('style', '3D 卡通繪本風', '3D Pixar animated movie style, cute render, vibrant soft lighting', '3D動畫', '🎨', this)" class="cute-card option-card active bg-white border-4 border-slate-200 rounded-2xl p-4 text-center">
-                            <div class="text-4xl sm:text-5xl mb-2">🎨</div>
-                            <div class="font-bold text-slate-800 text-sm sm:text-base">3D 立體繪本</div>
-                        </div>
-                        <div onclick="selectOption('style', '柔和水彩畫風', 'soft children storybook watercolor painting style, warm pastel colors', '水彩畫', '🖌️', this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center">
-                            <div class="text-4xl sm:text-5xl mb-2">🖌️</div>
-                            <div class="font-bold text-slate-800 text-sm sm:text-base">柔和水彩畫</div>
-                        </div>
-                        <div onclick="selectOption('style', '可愛黏土泥塑風', 'cute claymation, plasticine clay art style, handcrafted look', '黏土風', '🧸', this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center">
-                            <div class="text-4xl sm:text-5xl mb-2">🧸</div>
-                            <div class="font-bold text-slate-800 text-sm sm:text-base">手作黏土風</div>
-                        </div>
-                        <div onclick="selectOption('style', '童話插畫風', 'cute children illustration style, flat clean vector artwork', '童話插畫', '✏️', this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center">
-                            <div class="text-4xl sm:text-5xl mb-2">✏️</div>
-                            <div class="font-bold text-slate-800 text-sm sm:text-base">童話插畫風</div>
-                        </div>
-                        <div onclick="selectOption('style', '像素積木遊戲風', 'cute 8-bit pixel art style, retro video game aesthetic, voxel blocks', '像素風', '👾', this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center">
-                            <div class="text-4xl sm:text-5xl mb-2">👾</div>
-                            <div class="font-bold text-slate-800 text-sm sm:text-base">像素積木風</div>
-                        </div>
-                        <div onclick="selectOption('style', '璀璨霓虹科技風', 'futuristic cyberpunk neon glowing art style, vibrant pink and cyan lights', '霓虹風', '🌃', this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center">
-                            <div class="text-4xl sm:text-5xl mb-2">🌃</div>
-                            <div class="font-bold text-slate-800 text-sm sm:text-base">璀璨霓虹風</div>
-                        </div>
-                        <div onclick="selectOption('style', '紙雕藝術風', 'intricate layered papercut craft art style, shadowbox effect, delicate paper texture', '紙雕風', '✂️', this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center">
-                            <div class="text-4xl sm:text-5xl mb-2">✂️</div>
-                            <div class="font-bold text-slate-800 text-sm sm:text-base">立體紙雕風</div>
-                        </div>
-                        <div onclick="selectOption('style', '彩色蠟筆手繪風', 'cute children crayon drawing style, hand-drawn texture, cheerful colors', '蠟筆手繪', '🖍️', this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center">
-                            <div class="text-4xl sm:text-5xl mb-2">🖍️</div>
-                            <div class="font-bold text-slate-800 text-sm sm:text-base">彩色蠟筆風</div>
-                        </div>
-                    </div>
+                    <!-- Step 4: 光線與色彩 -->
+<div id="step-4" class="step-panel hidden grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+<div onclick="selectOption('lighting','溫暖金光','warm golden festive lighting, cozy glowing highlights, soft golden glow','溫暖金光','🌟',this)" class="cute-card option-card active bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">🌟</div><div class="font-bold text-slate-800 text-sm sm:text-base">溫暖金光</div></div>
+<div onclick="selectOption('lighting','夢幻藍紫夜光','dreamy blue and purple night lighting, magical starry glow, soft ethereal light','夢幻藍紫夜光','🌌',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">🌌</div><div class="font-bold text-slate-800 text-sm sm:text-base">夢幻藍紫夜光</div></div>
+<div onclick="selectOption('lighting','柔和粉紅晨光','soft pink morning light, gentle pastel glow, warm sunrise atmosphere','柔和粉紅晨光','🌅',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">🌅</div><div class="font-bold text-slate-800 text-sm sm:text-base">柔和粉紅晨光</div></div>
+<div onclick="selectOption('lighting','璀璨聖誕燈飾','sparkling Christmas fairy lights, colorful glowing decorations, festive bokeh lights','璀璨聖誕燈飾','✨',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">✨</div><div class="font-bold text-slate-800 text-sm sm:text-base">璀璨聖誕燈飾</div></div>
+<div onclick="selectOption('lighting','神秘月光雪景','mysterious moonlight, cool silver-blue tones, glowing snow reflections','神秘月光雪景','🌙',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">🌙</div><div class="font-bold text-slate-800 text-sm sm:text-base">神秘月光雪景</div></div>
+<div onclick="selectOption('lighting','繽紛霓虹光彩','vibrant neon lighting, colorful pink and cyan glow, futuristic festive atmosphere','繽紛霓虹光彩','🌈',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">🌈</div><div class="font-bold text-slate-800 text-sm sm:text-base">繽紛霓虹光彩</div></div></div>
+<!-- Step 5: 構圖 -->
+<div id="step-5" class="step-panel hidden grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+<div onclick="selectOption('composition','主角居中','centered composition with the main character as the clear focal point','主角居中','🎯',this)" class="cute-card option-card active bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">🎯</div><div class="font-bold text-slate-800 text-sm sm:text-base">主角居中</div></div>
+<div onclick="selectOption('composition','主角偏左','main character positioned on the left side, balanced negative space on the right','主角偏左','⬅️',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">⬅️</div><div class="font-bold text-slate-800 text-sm sm:text-base">主角偏左</div></div>
+<div onclick="selectOption('composition','主角偏右','main character positioned on the right side, balanced negative space on the left','主角偏右','➡️',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">➡️</div><div class="font-bold text-slate-800 text-sm sm:text-base">主角偏右</div></div>
+<div onclick="selectOption('composition','特寫大頭照','close-up portrait composition, expressive face, detailed foreground, shallow background','特寫大頭照','😊',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">😊</div><div class="font-bold text-slate-800 text-sm sm:text-base">特寫大頭照</div></div>
+<div onclick="selectOption('composition','廣角全景','wide-angle panoramic composition, expansive Christmas scenery, detailed background','廣角全景','🏞️',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">🏞️</div><div class="font-bold text-slate-800 text-sm sm:text-base">廣角全景</div></div>
+<div onclick="selectOption('composition','簡潔賀卡構圖','clean minimal greeting-card composition, simple uncluttered background, clear space for greeting text','簡潔賀卡構圖','🎴',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">🎴</div><div class="font-bold text-slate-800 text-sm sm:text-base">簡潔賀卡構圖</div></div></div>
+<!-- Step 6: 畫風 -->
+<div id="step-6" class="step-panel hidden grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+<div onclick="selectOption('style','3D 卡通繪本風','3D Pixar animated movie style, cute render, vibrant soft lighting','3D動畫','🎨',this)" class="cute-card option-card active bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">🎨</div><div class="font-bold text-slate-800 text-sm sm:text-base">3D 立體繪本</div></div>
+<div onclick="selectOption('style','柔和水彩畫風','soft children storybook watercolor painting style, warm pastel colors','水彩畫','🖌️',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">🖌️</div><div class="font-bold text-slate-800 text-sm sm:text-base">柔和水彩畫</div></div>
+<div onclick="selectOption('style','可愛黏土泥塑風','cute claymation, plasticine clay art style, handcrafted look','黏土風','🧸',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">🧸</div><div class="font-bold text-slate-800 text-sm sm:text-base">手作黏土風</div></div>
+<div onclick="selectOption('style','童話插畫風','cute children illustration style, flat clean vector artwork','童話插畫','✏️',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">✏️</div><div class="font-bold text-slate-800 text-sm sm:text-base">童話插畫風</div></div>
+<div onclick="selectOption('style','像素積木遊戲風','cute 8-bit pixel art style, retro video game aesthetic, voxel blocks','像素風','👾',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">👾</div><div class="font-bold text-slate-800 text-sm sm:text-base">像素積木風</div></div>
+<div onclick="selectOption('style','璀璨霓虹科技風','futuristic cyberpunk neon glowing art style, vibrant pink and cyan lights','霓虹風','🌃',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">🌃</div><div class="font-bold text-slate-800 text-sm sm:text-base">璀璨霓虹風</div></div>
+<div onclick="selectOption('style','紙雕藝術風','intricate layered papercut craft art style, shadowbox effect, delicate paper texture','紙雕風','✂️',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">✂️</div><div class="font-bold text-slate-800 text-sm sm:text-base">立體紙雕風</div></div>
+<div onclick="selectOption('style','彩色蠟筆手繪風','cute children crayon drawing style, hand-drawn texture, cheerful colors','蠟筆手繪','🖍️',this)" class="cute-card option-card bg-white border-4 border-slate-200 rounded-2xl p-4 text-center"><div class="text-4xl sm:text-5xl mb-2">🖍️</div><div class="font-bold text-slate-800 text-sm sm:text-base">彩色蠟筆風</div></div></div>
+<!-- Step 7: 自由創作與語音 Prompt 輸入關卡 -->
+<div id="step-7" class="step-panel hidden flex flex-col space-y-4">
+<div class="bg-amber-100/60 p-4 rounded-2xl border-2 border-amber-300"><label class="block font-bold text-amber-900 text-sm sm:text-base mb-2 flex items-center gap-2"><i class="fa-solid fa-pen-sparkles text-red-500"></i> 試試追加自訂魔法細節 (文字或語音)：</label><div class="relative"><input type="text" id="custom-prompt-input" oninput="updatePromptBlocks()" placeholder="例如：背景有極光、正在吃大餐..." class="w-full p-3 pr-12 rounded-xl border-2 border-amber-300 focus:outline-none focus:border-red-500 text-sm sm:text-base font-semibold"><button onclick="toggleVoiceInput()" id="mic-btn" class="absolute right-2 top-1.5 bottom-1.5 bg-red-500 hover:bg-red-600 text-white px-3 rounded-lg flex items-center justify-center transition shadow"><i class="fa-solid fa-microphone text-base" id="mic-icon"></i></button></div><p id="voice-status" class="text-xs text-amber-800 mt-2 flex items-center gap-1 font-bold">💡 點擊麥克風可以直接用語音（廣東話/普通話）說出想法喔！</p></div>
+<div class="bg-blue-50 p-4 rounded-2xl border-2 border-blue-200 text-xs text-blue-900 leading-relaxed"><span class="font-bold text-sm block mb-1">⭐ 恭喜你！你已經完成 Prompt 組合！</span>現在你可以點擊右側的「施展魔法！複製中文 Prompt」，然後把 Prompt 貼到 Gemini 或 Copilot 生成聖誕卡！</div></div>
+</div>
 
-                    <!-- Step 5: 自由創作與語音 Prompt 輸入關卡 -->
-                    <div id="step-5" class="step-panel hidden flex flex-col space-y-4">
-                        <div class="bg-amber-100/60 p-4 rounded-2xl border-2 border-amber-300">
-                            <label class="block font-bold text-amber-900 text-sm sm:text-base mb-2 flex items-center gap-2">
-                                <i class="fa-solid fa-pen-sparkles text-red-500"></i> 試試追加自訂魔法細節 (文字或語音)：
-                            </label>
-                            <div class="relative">
-                                <input type="text" id="custom-prompt-input" oninput="updatePromptBlocks()" placeholder="例如：背景有極光、正在吃大餐..." class="w-full p-3 pr-12 rounded-xl border-2 border-amber-300 focus:outline-none focus:border-red-500 text-sm sm:text-base font-semibold">
-                                <button onclick="toggleVoiceInput()" id="mic-btn" class="absolute right-2 top-1.5 bottom-1.5 bg-red-500 hover:bg-red-600 text-white px-3 rounded-lg flex items-center justify-center transition shadow">
-                                    <i class="fa-solid fa-microphone text-base" id="mic-icon"></i>
-                                </button>
-                            </div>
-                            <p id="voice-status" class="text-xs text-amber-800 mt-2 flex items-center gap-1 font-bold">
-                                💡 點擊麥克風可以直接用語音（廣東話/普通話）說出想法喔！
-                            </p>
-                        </div>
-
-                        <div class="bg-blue-50 p-4 rounded-2xl border-2 border-blue-200 text-xs text-blue-900 leading-relaxed">
-                            <span class="font-bold text-sm block mb-1">⭐ 恭喜你！你已經完成 Prompt 組合！</span>
-                            現在你隨時可以點擊右側的 **「施展魔法！生成聖誕卡」** 按鈕來產生作品！
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 導覽控制按鈕 -->
+<!-- 導覽控制按鈕 -->
                 <div class="flex justify-between items-center mt-6 pt-4 border-t-2 border-slate-100">
                     <button id="prev-btn" onclick="changeStep(-1)" class="btn-bounce bg-slate-300 hover:bg-slate-400 text-slate-700 font-bold px-5 py-3 rounded-2xl text-sm sm:text-base flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
                         <i class="fa-solid fa-arrow-left"></i> 上一步
@@ -369,12 +341,7 @@
                     </div>
 
                     <!-- 生成圖片按鈕 -->
-                    <button id="generate-btn" onclick="copyChinesePrompt()" class="btn-bounce w-full mt-4 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-extrabold text-lg py-4 rounded-2xl shadow-xl flex items-center justify-center gap-2 border-b-4 border-red-800 glow-gold">
-                        <i class="fa-solid fa-copy text-yellow-300 text-xl"></i>
-                        <span>施展魔法！複製中文 Prompt</span>
-                    </button>
-
-                    <p id="copy-status" class="text-xs text-emerald-700 font-bold mt-2 text-center"></p>
+                    <button id="generate-btn" onclick="copyChinesePrompt()" class="btn-bounce w-full mt-4 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-extrabold text-lg py-4 rounded-2xl shadow-xl flex items-center justify-center gap-2 border-b-4 border-red-800 glow-gold"><i class="fa-solid fa-copy text-yellow-300 text-xl"></i><span>施展魔法！複製中文 Prompt</span></button><p id="copy-status" class="text-xs text-emerald-700 font-bold mt-2 text-center"></p>
                 </div>
 
                 
@@ -391,110 +358,32 @@
     </div>
 
     <!-- 彈出視窗 1：Prompt 達人教學手冊 Modal -->
-    <div id="guide-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl border-4 border-yellow-400 max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto relative shadow-2xl">
-            <button onclick="closePromptGuide()" class="absolute top-4 right-4 bg-slate-200 hover:bg-slate-300 rounded-full w-10 h-10 flex items-center justify-center font-bold text-slate-700">✕</button>
-            
-            <div class="text-center mb-6">
-                <span class="text-4xl">🎓</span>
-                <h2 class="text-2xl font-extrabold text-red-600 mt-2">如何成為 AI Prompt 魔法達人？</h2>
-                <p class="text-xs text-slate-500 mt-1">Prompt 就是給 AI 的畫畫指令！越詳細，畫得越漂亮喔！</p>
-            </div>
+<div id="guide-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"><div class="bg-white rounded-3xl border-4 border-yellow-400 max-w-3xl w-full p-5 sm:p-7 max-h-[90vh] overflow-y-auto relative shadow-2xl"><button onclick="closePromptGuide()" class="absolute top-4 right-4 bg-slate-200 hover:bg-slate-300 rounded-full w-10 h-10 flex items-center justify-center font-bold text-slate-700">✕</button>
+<div class="text-center mb-5"><span class="text-4xl">🎓</span><h2 class="text-2xl font-extrabold text-red-600 mt-2">成為 Prompt 達人小秘訣</h2><p class="text-xs sm:text-sm text-slate-600 mt-2">跟隨七個關卡，把想法變成清楚的畫畫指令。Prompt 不是越長越好，而是要具體、相關和不矛盾；生成後也可以再修改。</p></div>
+<div class="bg-blue-50 border-2 border-blue-200 p-4 rounded-2xl mb-5"><h3 class="font-bold text-blue-800 text-sm mb-2">🎯 七步創作流程</h3><ol class="text-xs sm:text-sm text-slate-700 space-y-1 font-semibold list-decimal list-inside"><li>設計主角（Who）</li><li>加入服裝、道具與動作（Action）</li><li>設計場景與時間（Where & When）</li><li>選擇光線與色彩（Light & Color）</li><li>選擇構圖方式（Composition）</li><li>選擇藝術風格（Style）</li><li>加入自訂細節與檢查（Details）</li></ol></div>
+<div class="bg-amber-50 p-4 rounded-2xl border-2 border-amber-200 mb-5"><h3 class="font-bold text-amber-900 text-sm mb-2">🧩 每一步要想什麼？</h3><div class="space-y-2 text-xs sm:text-sm text-slate-700"><p><b>1. 主角：</b>牠是誰？有什麼外形、表情或性格？例如「一隻圓潤的小企鵝，露出開心的笑容」。</p><p><b>2. 動作與道具：</b>牠穿什麼、拿什麼、正在做什麼？例如「戴紅色聖誕帽，抱著繫有金色絲帶的禮物盒」。</p><p><b>3. 場景與時間：</b>故事在哪裡、什麼時間發生？例如「在飄雪的夜晚，站在掛滿燈飾的聖誕樹前」。</p><p><b>4. 光線與色彩：</b>用什麼光線和顏色表達氣氛？例如「溫暖金色燈光照亮主角，搭配紅、綠和金色」。</p><p><b>5. 構圖方式：</b>主角放在哪裡？哪裡需要留白？例如「主角偏左，右側預留乾淨空間，方便稍後加入祝福語」。</p><p><b>6. 藝術風格：</b>希望畫面呈現什麼媒材或視覺風格？例如「採用 3D 立體繪本風格，表面柔和細緻」。</p><p><b>7. 自訂細節：</b>還想加入什麼？例如「在樹下加入兩個小禮物；保留右側留白，不要直接生成文字」。</p></div></div>
+<div class="bg-emerald-50 border-2 border-emerald-200 p-4 rounded-2xl mb-5"><h3 class="font-bold text-emerald-800 text-sm mb-2">✍️ 七步句式框架</h3><div class="bg-white p-3 rounded-xl border border-emerald-200 text-xs sm:text-sm leading-relaxed">請創作一張<b>聖誕賀卡插畫</b>。主角是<b>［主角］</b>，<b>［服裝、道具與動作］</b>，身處<b>［場景與時間］</b>。光線與色彩採用<b>［光線與色彩］</b>，構圖為<b>［構圖方式］</b>，使用<b>［藝術風格］</b>。另外加入<b>［自訂細節］</b>。</div></div>
+<div class="bg-rose-50 border-2 border-rose-200 p-4 rounded-2xl mb-5"><h3 class="font-bold text-rose-700 text-sm mb-2">⚠️ 常見問題</h3><ul class="text-xs sm:text-sm text-slate-700 space-y-1"><li>• 太簡短：缺少動作、場景、光線、構圖或風格。</li><li>• 太模糊：「漂亮」、「可愛」沒有說明是溫馨、華麗還是夢幻。</li><li>• 要求矛盾：例如同時要求「主角偏左」和「主角居中」。</li><li>• 背景太滿：若要加入祝福語，應選擇留白或簡潔構圖。</li><li>• 加入個人資料：不要在 Prompt 輸入學生姓名、相片或住址。</li></ul></div>
+<div class="bg-indigo-50 border-2 border-indigo-200 p-4 rounded-2xl mb-5"><h3 class="font-bold text-indigo-800 text-sm mb-2">✅ 複製前檢查</h3><ul class="text-xs sm:text-sm text-slate-700 space-y-1"><li>☐ 主角</li><li>☐ 動作與道具</li><li>☐ 場景與時間</li><li>☐ 光線與色彩</li><li>☐ 構圖方式</li><li>☐ 藝術風格</li><li>☐ 自訂細節</li><li>☐ 要求之間沒有矛盾</li></ul></div>
+<div class="bg-yellow-50 border-2 border-yellow-300 p-4 rounded-2xl mb-5"><h3 class="font-bold text-yellow-800 text-sm mb-2">🔄 生成後怎樣再進步？</h3><p class="text-xs sm:text-sm text-slate-700">先比較作品與你的要求：主角、動作、場景、光線、構圖或風格哪一項不像？每次只調整一至兩個重點，再生成一次。AI 不一定完全照做，詳細指令也不保證一次成功。</p></div>
+<button onclick="closePromptGuide()" class="w-full bg-red-600 text-white font-bold py-3 rounded-xl shadow">我知道了，開始七關創作！</button></div></div>
 
-            <!-- Prompt 魔法公式圖解 -->
-            <div class="bg-amber-50 p-4 rounded-2xl border-2 border-amber-200 mb-6">
-                <h3 class="font-bold text-amber-900 text-sm mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-wand-magic"></i> 專業 Prompt 六大要素：
-                </h3>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-center text-xs font-bold">
-                    <div class="bg-red-500 text-white p-2 rounded-xl">1. 主角<br><span class="text-[10px] font-normal">Who：誰／什麼</span></div>
-                    <div class="bg-amber-500 text-white p-2 rounded-xl">2. 動作與道具<br><span class="text-[10px] font-normal">Action：做什麼</span></div>
-                    <div class="bg-teal-500 text-white p-2 rounded-xl">3. 場景與時間<br><span class="text-[10px] font-normal">Where & When</span></div>
-                    <div class="bg-indigo-500 text-white p-2 rounded-xl">4. 藝術風格<br><span class="text-[10px] font-normal">Style</span></div>
-                    <div class="bg-purple-500 text-white p-2 rounded-xl">5. 光線與色彩<br><span class="text-[10px] font-normal">Light & Color</span></div>
-                    <div class="bg-emerald-600 text-white p-2 rounded-xl">6. 構圖與細節<br><span class="text-[10px] font-normal">Composition</span></div>
-                </div>
-                <p class="text-[11px] text-amber-800 mt-3 leading-relaxed">
-                    一個好的 Prompt 不只是寫「畫一隻企鵝」，而是清楚說明：<b>誰在做什麼、在哪裡、什麼時間、什麼風格、有什麼光線和細節</b>。AI 會根據這些提示，畫出更接近你想像的畫面。
-                </p>
-            </div>
-
-            <!-- 對比範例 -->
-            <div class="space-y-3">
-                <h3 class="font-bold text-slate-800 text-sm">💡 Prompt 質素比較：</h3>
-
-                <div class="bg-red-50 border-2 border-red-200 p-3 rounded-xl flex items-start gap-3">
-                    <span class="text-xl">❌</span>
-                    <div>
-                        <div class="font-bold text-xs text-red-700">初階 Prompt：</div>
-                        <div class="text-xs text-slate-600">「畫一隻聖誕企鵝。」</div>
-                        <div class="text-[11px] text-slate-400 mt-1">AI 只知道主角是企鵝，但不知道牠在做什麼、在哪裡、用什麼風格，畫面可能較普通。</div>
-                    </div>
-                </div>
-
-                <div class="bg-amber-50 border-2 border-amber-200 p-3 rounded-xl flex items-start gap-3">
-                    <span class="text-xl">🙂</span>
-                    <div>
-                        <div class="font-bold text-xs text-amber-800">進階 Prompt：</div>
-                        <div class="text-xs text-slate-700 font-semibold">「一隻可愛小企鵝戴著紅色聖誕帽，在飄雪的夜晚站在聖誕樹前，3D 動畫風格。」</div>
-                        <div class="text-[11px] text-amber-700 mt-1">已包含主角、動作、場景和風格，畫面會更完整。</div>
-                    </div>
-                </div>
-
-                <div class="bg-emerald-50 border-2 border-emerald-200 p-3 rounded-xl flex items-start gap-3">
-                    <span class="text-xl">✅</span>
-                    <div>
-                        <div class="font-bold text-xs text-emerald-800">專業 Prompt：</div>
-                        <div class="text-xs text-slate-700 font-semibold">「一隻圓潤可愛的小企鵝，戴著紅色聖誕帽，手抱彩色禮物盒，站在飄雪的聖誕樹前；夜空有柔和星光與溫暖燈飾，使用 3D 立體繪本風格，畫面焦點清晰、構圖平衡，色彩溫暖和諧，適合作為聖誕賀卡。」</div>
-                        <div class="text-[11px] text-emerald-600 mt-1">包含主角特徵、動作、場景、時間、光線、風格、構圖和用途，AI 更容易生成精緻而切題的作品。</div>
-                    </div>
-                </div>
-
-                <div class="bg-blue-50 border-2 border-blue-200 p-3 rounded-xl">
-                    <div class="font-bold text-xs text-blue-800 mb-1">✍️ Prompt 句式框架：</div>
-                    <div class="text-xs text-slate-700 leading-relaxed">
-                        請創作一張<b>聖誕賀卡插畫</b>。主角是<b>［誰］</b>，正在<b>［做什麼］</b>，身處於<b>［哪裡／什麼時間］</b>。畫面加入<b>［特別細節］</b>，使用<b>［藝術風格］</b>；光線<b>［柔和／溫暖／夢幻］</b>，色彩<b>［豐富和諧］</b>，構圖<b>［主角清晰、背景不搶焦點］</b>。
-                    </div>
-                </div>
-            </div>
-
-            <button onclick="closePromptGuide()" class="w-full mt-6 bg-red-600 text-white font-bold py-3 rounded-xl shadow">我知道了，開始創作！</button>
-        </div>
-    </div>
-
-    <!-- 音效處理與系統邏輯 Script -->
+<!-- 音效處理與系統邏輯 Script -->
     <script>
         // 當前遊戲關卡狀態
         let currentStep = 1;
-        const maxSteps = 5;
+        const maxSteps = 7;
 
         // Prompt 設定組合狀態
-        const selections = {
-            subject: { label: '小企鵝', icon: '🐧', prompt: 'a cute adorable baby penguin' },
-            action: { label: '戴聖誕帽', icon: '🧢', prompt: 'wearing a cute red Santa hat' },
-            environment: { label: '夢幻雪夜', icon: '❄️', prompt: 'in a magical snowy winter night sky with soft falling snow' },
-            style: { label: '3D動畫', icon: '🎨', prompt: '3D Pixar animated movie style, cute render, vibrant soft lighting' }
-        };
+        const selections={subject:{label:'小企鵝',icon:'🐧',prompt:'a cute adorable baby penguin'},action:{label:'戴聖誕帽',icon:'🧢',prompt:'wearing a cute red Santa hat'},environment:{label:'夢幻雪夜',icon:'❄️',prompt:'in a magical snowy winter night sky with soft falling snow'},lighting:{label:'溫暖金光',icon:'🌟',prompt:'warm golden festive lighting, cozy glowing highlights'},composition:{label:'主角居中',icon:'🎯',prompt:'centered composition with the main character as the clear focal point'},style:{label:'3D動畫',icon:'🎨',prompt:'3D Pixar animated movie style, cute render, vibrant soft lighting'}};
 
         // 儲存實際發送給 AI 的英文 Prompt
         let currentEnglishPrompt = 'a cute adorable baby penguin, wearing a cute red Santa hat, in a magical snowy winter night sky with soft falling snow, 3D Pixar animated movie style, cute render, vibrant soft lighting, bright cozy lighting, Christmas holiday aesthetic, masterpiece, detailed, high resolution, centered composition';
 
         // 關卡助手對話內容
-        const helperTexts = {
-            1: "第一步：先想一想你想設計的主角。你可以選擇動物、人物或節日角色；選好後，再想想牠的表情、年齡和性格，例如可愛、勇敢、開心或神秘。",
-            2: "第二步：為主角加入服裝、配件或動作。想一想：牠正在做什麼？手上拿著什麼？穿著什麼顏色的衣服？這些細節會令畫面更有故事感。",
-            3: "第三步：選擇故事發生的地點和時間。你可以想想：這裡是室內還是戶外？是白天還是晚上？有沒有雪、燈飾、禮物或其他聖誕元素？",
-            4: "第四步：選擇你喜歡的藝術風格。不同風格會帶來不同感覺，例如 3D 動畫較立體可愛、水彩較柔和溫暖、像素風較像遊戲畫面。",
-            5: "最後一步：加入你獨創的細節，例如天氣、光線、表情、小動物、魔法效果或想傳遞的祝福。越具體，AI 就越容易畫出你心中的畫面。"
-        };
+        const helperTexts={1:"第一步：先想一想你想設計的主角。你可以選擇動物、人物或節日角色；選好後，再想想牠的表情、年齡和性格，例如可愛、勇敢、開心或神秘。",2:"第二步：為主角加入服裝、配件或動作。想一想：牠正在做什麼？手上拿著什麼？穿著什麼顏色的衣服？這些細節會令畫面更有故事感。",3:"第三步：選擇故事發生的地點和時間。你可以想想：這裡是室內還是戶外？是白天還是晚上？有沒有雪、燈飾、禮物或其他聖誕元素？",4:"第四步：選擇光線與色彩。想一想你希望畫面是溫暖、夢幻、神秘還是熱鬧？光線和顏色會影響整張卡片的感覺。",5:"第五步：選擇構圖方式。想一想主角應該放在哪裡？背景要簡潔還是豐富？你想突出主角，還是展示整個聖誕場景？",6:"第六步：選擇你喜歡的藝術風格。不同風格會帶來不同感覺，例如 3D 動畫較立體可愛、水彩較柔和溫暖、像素風較像遊戲畫面。",7:"最後一步：加入你獨創的細節，例如天氣、表情、小動物、魔法效果或想傳遞的祝福。越具體，AI 就越容易畫出你心中的畫面。"};
 
-        const stepTitles = {
-            1: "第一步：設計主角（Who）",
-            2: "第二步：加入服裝、道具與動作（Action）",
-            3: "第三步：設計場景與時間（Where & When）",
-            4: "第四步：選擇藝術風格（Style）",
-            5: "第五步：加入光線、細節與創意（Details）"
-        };
+        const stepTitles={1:"第一步：設計主角（Who）",2:"第二步：加入服裝、道具與動作（Action）",3:"第三步：設計場景與時間（Where & When）",4:"第四步：選擇光線與色彩（Light & Color）",5:"第五步：選擇構圖方式（Composition）",6:"第六步：選擇藝術風格（Style）",7:"第七步：加入光線、細節與創意（Details）"};
 
         // 選擇選項
         function selectOption(category, label, promptText, shortName, icon, element) {
@@ -514,12 +403,7 @@
 
             let fullPrompt = [];
 
-            const categories = [
-                { key: 'subject', color: 'bg-red-500' },
-                { key: 'action', color: 'bg-amber-500' },
-                { key: 'environment', color: 'bg-teal-500' },
-                { key: 'style', color: 'bg-indigo-500' }
-            ];
+            const categories=[{key:'subject',color:'bg-red-500'},{key:'action',color:'bg-amber-500'},{key:'environment',color:'bg-teal-500'},{key:'lighting',color:'bg-purple-500'},{key:'composition',color:'bg-emerald-600'},{key:'style',color:'bg-indigo-500'}];
 
             categories.forEach(cat => {
                 const item = selections[cat.key];
@@ -533,29 +417,12 @@
             });
 
             // 加入自訂語音/文字 Prompt
-            const customInput = document.getElementById('custom-prompt-input')?.value.trim();
-            if (customInput) {
-                fullPrompt.push(customInput);
-                const customTag = document.createElement('div');
-                customTag.className = `bg-pink-500 text-white px-3 py-1.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-1 shadow-sm transform hover:scale-105 transition`;
-                customTag.innerHTML = `<span>✨</span> <span>${customInput}</span>`;
-                container.appendChild(customTag);
-            }
-
-            // 加入專業品質與構圖提示
-            const qualityPrompt = 'warm festive Christmas atmosphere, balanced composition, clear focal point, soft cinematic lighting, rich colors, detailed background, high quality, highly detailed, suitable for a greeting card';
-
-            // 組合給 AI 閱讀的專業英文指令
-            currentEnglishPrompt = fullPrompt.join(', ') + ', ' + qualityPrompt;
-
-            // 組合給學生閱讀的專業中文指令
-            const subj = selections.subject?.label || '小企鵝';
-            const act = selections.action?.label || '戴聖誕帽';
-            const env = selections.environment?.label || '夢幻雪夜';
-            const sty = selections.style?.label || '3D動畫';
-            const extraText = customInput ? `畫面特別加入：${customInput}。` : '';
-
-            document.getElementById('chinese-prompt-text').innerText = `請創作一張適合作為聖誕賀卡的插畫。主角是一隻／一位「${subj}」，牠／他正在「${act}」，身處於「${env}」。${extraText}整體使用「${sty}」風格，畫面要有清楚的焦點、平衡的構圖、柔和而有層次的光線、豐富但和諧的色彩，以及具聖誕節日氣氛的溫暖感。請將主角放在畫面中央偏上位置，背景細緻但不搶去主角注意力，適合加上祝福語。`;
+            const customInput=document.getElementById('custom-prompt-input')?.value.trim();
+            if(customInput){fullPrompt.push(customInput);const tag=document.createElement('div');tag.className='bg-pink-500 text-white px-3 py-1.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-1 shadow-sm';tag.innerHTML=`<span>✨</span> <span>${customInput}</span>`;document.getElementById('blocks-container').appendChild(tag);}
+            const qualityPrompt='warm festive Christmas atmosphere, detailed background, high quality, highly detailed, suitable for a greeting card';
+            currentEnglishPrompt=fullPrompt.join(', ')+', '+qualityPrompt;
+            const subj=selections.subject?.label||'小企鵝',act=selections.action?.label||'戴聖誕帽',env=selections.environment?.label||'夢幻雪夜',light=selections.lighting?.label||'溫暖金光',comp=selections.composition?.label||'主角居中',sty=selections.style?.label||'3D動畫',extra=customInput?`畫面特別加入：${customInput}。`:'';
+            document.getElementById('chinese-prompt-text').innerText=`請創作一張適合作為聖誕賀卡的插畫。主角是一隻／一位「${subj}」，牠／他正在「${act}」，身處於「${env}」。${extra}整體使用「${light}」的光線與色彩效果，採用「${comp}」的構圖方式，並以「${sty}」風格呈現。畫面要有清楚的焦點、平衡的構圖、具層次的光影、豐富但和諧的色彩，以及濃厚而溫暖的聖誕節日氣氛。請確保主角清晰突出，背景細緻但不搶去注意力，適合加上祝福語。`;
         }
 
         // 關卡切換邏輯
@@ -636,16 +503,7 @@
         }
 
 // 複製中文 Prompt
-        function copyChinesePrompt() {
-            const promptText = document.getElementById('chinese-prompt-text').innerText.trim();
-            const status = document.getElementById('copy-status');
-            if (!promptText) { status.innerText = '⚠️ 請先完成 Prompt 選擇！'; return; }
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(promptText).then(() => {
-                    status.innerText = '✅ 中文 Prompt 已複製！請貼到 Gemini 或 Copilot 生成聖誕卡。';
-                }).catch(() => { status.innerText = '⚠️ 無法自動複製，請手動選取並複製 Prompt。'; });
-            } else { status.innerText = '⚠️ 此瀏覽器不支援自動複製，請手動選取並複製 Prompt。'; }
-        }
+        function copyChinesePrompt(){const t=document.getElementById('chinese-prompt-text').innerText.trim(),st=document.getElementById('copy-status');if(!t){st.innerText='⚠️ 請先完成 Prompt 選擇！';return;}if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(()=>st.innerText='✅ 中文 Prompt 已複製！請貼到 Gemini 或 Copilot 生成聖誕卡。').catch(()=>st.innerText='⚠️ 無法自動複製，請手動選取並複製 Prompt。');}else st.innerText='⚠️ 此瀏覽器不支援自動複製，請手動選取並複製 Prompt。';}
 
         // Modal 相關控制
         function openPromptGuide() { document.getElementById('guide-modal').classList.remove('hidden'); }
