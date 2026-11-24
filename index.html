@@ -360,10 +360,12 @@
                         <!-- 動態插入積木標籤 -->
                     </div>
 
-                    <!-- 實際發送給 AI 的 Prompt 隱藏/展開預覽 -->
-                    <div class="bg-slate-900 text-emerald-400 p-3 rounded-xl text-xs font-mono break-all relative">
-                        <div class="text-slate-500 text-[10px] mb-1">AI 讀取的神奇魔法語言 (English Prompt):</div>
-                        <span id="final-prompt-text">A cute adorable baby penguin, wearing a cute red Santa hat, in a magical snowy winter night sky with soft falling snow, 3D Pixar animated movie style.</span>
+                    <!-- 實際組合的中文指令預覽 -->
+                    <div class="bg-amber-50 border-2 border-amber-300 text-amber-950 p-3.5 rounded-xl text-sm font-bold relative shadow-inner">
+                        <div class="text-amber-700 text-xs mb-1 flex items-center gap-1">
+                            <i class="fa-solid fa-wand-sparkles text-red-500"></i> 你的完整中文魔法指令 (Prompt)：
+                        </div>
+                        <span id="chinese-prompt-text" class="leading-relaxed">一隻可愛的「小企鵝」，「戴聖誕帽」，在「夢幻雪夜」裡，用「3D動畫」畫出來！</span>
                     </div>
 
                     <!-- 生成圖片按鈕 -->
@@ -543,6 +545,9 @@
             style: { label: '3D動畫', icon: '🎨', prompt: '3D Pixar animated movie style, cute render, vibrant soft lighting' }
         };
 
+        // 儲存實際發送給 AI 的英文 Prompt
+        let currentEnglishPrompt = 'a cute adorable baby penguin, wearing a cute red Santa hat, in a magical snowy winter night sky with soft falling snow, 3D Pixar animated movie style, cute render, vibrant soft lighting, bright cozy lighting, Christmas holiday aesthetic, masterpiece, detailed, high resolution, centered composition';
+
         // 關卡助手對話內容
         const helperTexts = {
             1: "第一步：請用手指點選一個你最喜歡的聖誕主角吧！牠會是今天卡片的主角喔！",
@@ -606,8 +611,17 @@
                 container.appendChild(customTag);
             }
 
-            const finalPrompt = fullPrompt.join(', ') + ', bright cozy lighting, Christmas holiday aesthetic, masterpiece, detailed, high resolution, centered composition';
-            document.getElementById('final-prompt-text').innerText = finalPrompt;
+            // 組合給 AI 讀取的英文指令（背景運作）
+            currentEnglishPrompt = fullPrompt.join(', ') + ', bright cozy lighting, Christmas holiday aesthetic, masterpiece, detailed, high resolution, centered composition';
+
+            // 組合給學生閱讀的流暢中文指令
+            const subj = selections.subject?.label || '小企鵝';
+            const act = selections.action?.label || '戴聖誕帽';
+            const env = selections.environment?.label || '夢幻雪夜';
+            const sty = selections.style?.label || '3D動畫';
+            const extraText = customInput ? `，加上「${customInput}」` : '';
+
+            document.getElementById('chinese-prompt-text').innerText = `主角是「${subj}」，正在「${act}」，身處在「${env}」${extraText}，使用「${sty}」風格畫出來！`;
         }
 
         // 關卡切換邏輯
@@ -739,7 +753,7 @@
 
         // 呼叫 Gemini 3.1 Flash Image API 生成卡片
         async function generateXmasCard() {
-            const promptText = document.getElementById('final-prompt-text').innerText;
+            const promptText = currentEnglishPrompt;
             
             document.getElementById('placeholder-state').classList.add('hidden');
             document.getElementById('result-state').classList.add('hidden');
