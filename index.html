@@ -404,34 +404,56 @@
             <!-- Prompt 魔法公式圖解 -->
             <div class="bg-amber-50 p-4 rounded-2xl border-2 border-amber-200 mb-6">
                 <h3 class="font-bold text-amber-900 text-sm mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-wand-magic"></i> 魔法 Prompt 4 要素黃金公式：
+                    <i class="fa-solid fa-wand-magic"></i> 專業 Prompt 六大要素：
                 </h3>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs font-bold">
-                    <div class="bg-red-500 text-white p-2 rounded-xl">1. 主角<br><span class="text-[10px] font-normal">(Who)</span></div>
-                    <div class="bg-amber-500 text-white p-2 rounded-xl">2. 服裝動作<br><span class="text-[10px] font-normal">(Action)</span></div>
-                    <div class="bg-teal-500 text-white p-2 rounded-xl">3. 場景<br><span class="text-[10px] font-normal">(Where)</span></div>
-                    <div class="bg-indigo-500 text-white p-2 rounded-xl">4. 畫風<br><span class="text-[10px] font-normal">(Style)</span></div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-center text-xs font-bold">
+                    <div class="bg-red-500 text-white p-2 rounded-xl">1. 主角<br><span class="text-[10px] font-normal">Who：誰／什麼</span></div>
+                    <div class="bg-amber-500 text-white p-2 rounded-xl">2. 動作與道具<br><span class="text-[10px] font-normal">Action：做什麼</span></div>
+                    <div class="bg-teal-500 text-white p-2 rounded-xl">3. 場景與時間<br><span class="text-[10px] font-normal">Where & When</span></div>
+                    <div class="bg-indigo-500 text-white p-2 rounded-xl">4. 藝術風格<br><span class="text-[10px] font-normal">Style</span></div>
+                    <div class="bg-purple-500 text-white p-2 rounded-xl">5. 光線與色彩<br><span class="text-[10px] font-normal">Light & Color</span></div>
+                    <div class="bg-emerald-600 text-white p-2 rounded-xl">6. 構圖與細節<br><span class="text-[10px] font-normal">Composition</span></div>
                 </div>
+                <p class="text-[11px] text-amber-800 mt-3 leading-relaxed">
+                    一個好的 Prompt 不只是寫「畫一隻企鵝」，而是清楚說明：<b>誰在做什麼、在哪裡、什麼時間、什麼風格、有什麼光線和細節</b>。AI 會根據這些提示，畫出更接近你想像的畫面。
+                </p>
             </div>
 
             <!-- 對比範例 -->
             <div class="space-y-3">
-                <h3 class="font-bold text-slate-800 text-sm">💡 範例比較：</h3>
+                <h3 class="font-bold text-slate-800 text-sm">💡 Prompt 質素比較：</h3>
+
                 <div class="bg-red-50 border-2 border-red-200 p-3 rounded-xl flex items-start gap-3">
                     <span class="text-xl">❌</span>
                     <div>
-                        <div class="font-bold text-xs text-red-700">普通 Prompt (不夠具體)：</div>
-                        <div class="text-xs text-slate-600">「聖誕小貓」</div>
-                        <div class="text-[11px] text-slate-400 mt-1">👉 AI 不知道小貓在做什麼、在哪裡，畫出來比較普通。</div>
+                        <div class="font-bold text-xs text-red-700">初階 Prompt：</div>
+                        <div class="text-xs text-slate-600">「畫一隻聖誕企鵝。」</div>
+                        <div class="text-[11px] text-slate-400 mt-1">AI 只知道主角是企鵝，但不知道牠在做什麼、在哪裡、用什麼風格，畫面可能較普通。</div>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border-2 border-amber-200 p-3 rounded-xl flex items-start gap-3">
+                    <span class="text-xl">🙂</span>
+                    <div>
+                        <div class="font-bold text-xs text-amber-800">進階 Prompt：</div>
+                        <div class="text-xs text-slate-700 font-semibold">「一隻可愛小企鵝戴著紅色聖誕帽，在飄雪的夜晚站在聖誕樹前，3D 動畫風格。」</div>
+                        <div class="text-[11px] text-amber-700 mt-1">已包含主角、動作、場景和風格，畫面會更完整。</div>
                     </div>
                 </div>
 
                 <div class="bg-emerald-50 border-2 border-emerald-200 p-3 rounded-xl flex items-start gap-3">
                     <span class="text-xl">✅</span>
                     <div>
-                        <div class="font-bold text-xs text-emerald-800">達人級 Prompt (豐富具體)：</div>
-                        <div class="text-xs text-slate-700 font-semibold">「可愛小貓戴著聖誕帽，在溫馨木屋的聖誕樹旁，3D動畫風格」</div>
-                        <div class="text-[11px] text-emerald-600 mt-1">👉 包含了四大要素，AI 就能生成超級美麗精緻的畫作！</div>
+                        <div class="font-bold text-xs text-emerald-800">專業 Prompt：</div>
+                        <div class="text-xs text-slate-700 font-semibold">「一隻圓潤可愛的小企鵝，戴著紅色聖誕帽，手抱彩色禮物盒，站在飄雪的聖誕樹前；夜空有柔和星光與溫暖燈飾，使用 3D 立體繪本風格，畫面焦點清晰、構圖平衡，色彩溫暖和諧，適合作為聖誕賀卡。」</div>
+                        <div class="text-[11px] text-emerald-600 mt-1">包含主角特徵、動作、場景、時間、光線、風格、構圖和用途，AI 更容易生成精緻而切題的作品。</div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 border-2 border-blue-200 p-3 rounded-xl">
+                    <div class="font-bold text-xs text-blue-800 mb-1">✍️ Prompt 句式框架：</div>
+                    <div class="text-xs text-slate-700 leading-relaxed">
+                        請創作一張<b>聖誕賀卡插畫</b>。主角是<b>［誰］</b>，正在<b>［做什麼］</b>，身處於<b>［哪裡／什麼時間］</b>。畫面加入<b>［特別細節］</b>，使用<b>［藝術風格］</b>；光線<b>［柔和／溫暖／夢幻］</b>，色彩<b>［豐富和諧］</b>，構圖<b>［主角清晰、背景不搶焦點］</b>。
                     </div>
                 </div>
             </div>
@@ -459,19 +481,19 @@
 
         // 關卡助手對話內容
         const helperTexts = {
-            1: "第一步：請用手指點選一個你最喜歡的聖誕主角吧！牠會是今天卡片的主角喔！",
-            2: "第二步：太棒了！現在為你的主角穿上「服裝」或拿著「禮物」吧！",
-            3: "第三步：接著，選擇一個美麗的「聖誕背景場景」吧！",
-            4: "第四步：你想用什麼「畫畫風格」來繪製卡片呢？選好後點擊下一步！",
-            5: "最後一步自由挑戰：可以手動或用語音加入你獨特的魔法 Prompt 喔！"
+            1: "第一步：先想一想你想設計的主角。你可以選擇動物、人物或節日角色；選好後，再想想牠的表情、年齡和性格，例如可愛、勇敢、開心或神秘。",
+            2: "第二步：為主角加入服裝、配件或動作。想一想：牠正在做什麼？手上拿著什麼？穿著什麼顏色的衣服？這些細節會令畫面更有故事感。",
+            3: "第三步：選擇故事發生的地點和時間。你可以想想：這裡是室內還是戶外？是白天還是晚上？有沒有雪、燈飾、禮物或其他聖誕元素？",
+            4: "第四步：選擇你喜歡的藝術風格。不同風格會帶來不同感覺，例如 3D 動畫較立體可愛、水彩較柔和溫暖、像素風較像遊戲畫面。",
+            5: "最後一步：加入你獨創的細節，例如天氣、光線、表情、小動物、魔法效果或想傳遞的祝福。越具體，AI 就越容易畫出你心中的畫面。"
         };
 
         const stepTitles = {
-            1: "第一步：選擇你的聖誕主角",
-            2: "第二步：選擇服裝與道具",
-            3: "第三步：選擇背景場景",
-            4: "第四步：選擇畫風",
-            5: "第五步：自由 Prompt 追加 (文字/語音)"
+            1: "第一步：設計主角（Who）",
+            2: "第二步：加入服裝、道具與動作（Action）",
+            3: "第三步：設計場景與時間（Where & When）",
+            4: "第四步：選擇藝術風格（Style）",
+            5: "第五步：加入光線、細節與創意（Details）"
         };
 
         // 選擇選項
@@ -520,17 +542,20 @@
                 container.appendChild(customTag);
             }
 
-            // 組合給 AI 讀取的英文指令（背景運作）
-            currentEnglishPrompt = fullPrompt.join(', ') + ', bright cozy lighting, Christmas holiday aesthetic, masterpiece, detailed, high resolution, centered composition';
+            // 加入專業品質與構圖提示
+            const qualityPrompt = 'warm festive Christmas atmosphere, balanced composition, clear focal point, soft cinematic lighting, rich colors, detailed background, high quality, highly detailed, suitable for a greeting card';
 
-            // 組合給學生閱讀的流暢中文指令
+            // 組合給 AI 閱讀的專業英文指令
+            currentEnglishPrompt = fullPrompt.join(', ') + ', ' + qualityPrompt;
+
+            // 組合給學生閱讀的專業中文指令
             const subj = selections.subject?.label || '小企鵝';
             const act = selections.action?.label || '戴聖誕帽';
             const env = selections.environment?.label || '夢幻雪夜';
             const sty = selections.style?.label || '3D動畫';
-            const extraText = customInput ? `，加上「${customInput}」` : '';
+            const extraText = customInput ? `畫面特別加入：${customInput}。` : '';
 
-            document.getElementById('chinese-prompt-text').innerText = `主角是「${subj}」，正在「${act}」，身處在「${env}」${extraText}，使用「${sty}」風格畫出來！`;
+            document.getElementById('chinese-prompt-text').innerText = `請創作一張適合作為聖誕賀卡的插畫。主角是一隻／一位「${subj}」，牠／他正在「${act}」，身處於「${env}」。${extraText}整體使用「${sty}」風格，畫面要有清楚的焦點、平衡的構圖、柔和而有層次的光線、豐富但和諧的色彩，以及具聖誕節日氣氛的溫暖感。請將主角放在畫面中央偏上位置，背景細緻但不搶去主角注意力，適合加上祝福語。`;
         }
 
         // 關卡切換邏輯
@@ -614,23 +639,12 @@
         function copyChinesePrompt() {
             const promptText = document.getElementById('chinese-prompt-text').innerText.trim();
             const status = document.getElementById('copy-status');
-
-            if (!promptText) {
-                status.innerText = '⚠️ 請先完成 Prompt 選擇！';
-                return;
-            }
-
+            if (!promptText) { status.innerText = '⚠️ 請先完成 Prompt 選擇！'; return; }
             if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(promptText)
-                    .then(() => {
-                        status.innerText = '✅ 中文 Prompt 已複製！請貼到 Gemini 或 Copilot 生成聖誕卡。';
-                    })
-                    .catch(() => {
-                        status.innerText = '⚠️ 無法自動複製，請手動選取並複製 Prompt。';
-                    });
-            } else {
-                status.innerText = '⚠️ 此瀏覽器不支援自動複製，請手動選取並複製 Prompt。';
-            }
+                navigator.clipboard.writeText(promptText).then(() => {
+                    status.innerText = '✅ 中文 Prompt 已複製！請貼到 Gemini 或 Copilot 生成聖誕卡。';
+                }).catch(() => { status.innerText = '⚠️ 無法自動複製，請手動選取並複製 Prompt。'; });
+            } else { status.innerText = '⚠️ 此瀏覽器不支援自動複製，請手動選取並複製 Prompt。'; }
         }
 
         // Modal 相關控制
