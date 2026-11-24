@@ -131,10 +131,7 @@
                 <button onclick="openPromptGuide()" class="bg-yellow-400 hover:bg-yellow-300 text-red-900 font-extrabold px-4 py-1.5 rounded-full text-sm shadow-md transition flex items-center gap-1 border-2 border-white animate-bounce">
                     <i class="fa-solid fa-graduation-cap"></i> 🎓 成為 Prompt 達人小秘訣
                 </button>
-                <button onclick="openApiKeyModal()" class="bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold px-4 py-1.5 rounded-full text-sm shadow-md transition flex items-center gap-1 border-2 border-white">
-                    <i class="fa-solid fa-key"></i> 🔑 設定課堂魔法金鑰
-                </button>
-            </div>
+                </div>
             <h1 class="text-3xl sm:text-5xl font-extrabold text-white font-pop tracking-wide drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
                 🎄 聖誕 AI 創卡魔法屋 🎅
             </h1>
@@ -372,103 +369,15 @@
                     </div>
 
                     <!-- 生成圖片按鈕 -->
-                    <button id="generate-btn" onclick="generateXmasCard()" class="btn-bounce w-full mt-4 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-extrabold text-lg py-4 rounded-2xl shadow-xl flex items-center justify-center gap-2 border-b-4 border-red-800 glow-gold">
-                        <i class="fa-solid fa-wand-magic-sparkles text-yellow-300 text-xl"></i>
-                        <span>施展魔法！生成聖誕卡</span>
+                    <button id="generate-btn" onclick="copyChinesePrompt()" class="btn-bounce w-full mt-4 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-extrabold text-lg py-4 rounded-2xl shadow-xl flex items-center justify-center gap-2 border-b-4 border-red-800 glow-gold">
+                        <i class="fa-solid fa-copy text-yellow-300 text-xl"></i>
+                        <span>施展魔法！複製中文 Prompt</span>
                     </button>
 
-<!-- 前往外部 AI 工具 -->
-<div class="grid grid-cols-2 gap-2 mt-3">
-  <button onclick="openExternalAI('gemini')"
-          class="btn-bounce bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow flex items-center justify-center gap-2 text-xs sm:text-sm">
-    <i class="fa-solid fa-sparkles"></i> 前往 Gemini 畫卡
-  </button>
-
-  <button onclick="openExternalAI('copilot')"
-          class="btn-bounce bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 rounded-xl shadow flex items-center justify-center gap-2 text-xs sm:text-sm">
-    <i class="fa-solid fa-robot"></i> 前往 Copilot 畫卡
-  </button>
-</div>
-
-<p id="external-ai-status" class="text-xs text-emerald-700 font-bold mt-2 text-center"></p>
-<p class="text-[11px] text-slate-500 mt-1 text-center">
-  按下後會複製你的 Prompt，並開啟 AI 繪圖工具；請貼上 Prompt 後生成聖誕卡。
-</p>
-
+                    <p id="copy-status" class="text-xs text-emerald-700 font-bold mt-2 text-center"></p>
                 </div>
 
-                <!-- 聖誕卡結果顯示區域 -->
-                <div class="bg-white/95 backdrop-blur-md rounded-3xl p-5 shadow-2xl border-4 border-red-400 text-center relative overflow-hidden">
-                    <h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-image text-emerald-600"></i> 專屬聖誕卡片預覽
-                    </h3>
-
-                    <!-- 卡片畫面面板 -->
-                    <div id="card-preview-container" class="relative w-full aspect-[4/5] bg-slate-100 rounded-2xl border-2 border-slate-200 overflow-hidden flex flex-col items-center justify-center shadow-inner">
-                        
-                        <!-- 預設占位符狀態 -->
-                        <div id="placeholder-state" class="p-6 text-slate-400 flex flex-col items-center">
-                            <div class="text-6xl mb-3 animate-bounce">🎁</div>
-                            <p class="font-bold text-slate-600 text-sm">點擊「施展魔法」按鈕</p>
-                            <p class="text-xs text-slate-400 mt-1">你的專屬聖誕畫作就會顯示在這裡喔！</p>
-                        </div>
-
-                        <!-- 友善錯誤提示狀態 (取代 alert) -->
-                        <div id="error-state" class="hidden p-5 text-center flex flex-col items-center justify-center bg-red-50 w-full h-full">
-                            <div class="text-5xl mb-2">⛄💦</div>
-                            <p class="font-bold text-red-600 text-base">魔法暫時沒有施展成功</p>
-                            <p id="error-detail-text" class="text-xs text-slate-600 mt-2 bg-white p-2.5 rounded-xl border border-red-200 break-all max-w-full"></p>
-                            <p class="text-[11px] text-slate-400 mt-2">請確認網絡連線、API Key 權限或稍後再試喔！</p>
-                        </div>
-
-                        <!-- 載入中狀態 -->
-                        <div id="loading-state" class="hidden absolute inset-0 bg-white/90 backdrop-blur-sm flex flex-col items-center justify-center p-6 z-20">
-                            <div class="w-16 h-16 border-4 border-red-200 border-t-red-600 rounded-full animate-spin mb-4"></div>
-                            <p class="font-bold text-red-600 text-base animate-pulse">聖誕小精靈正努力畫畫中...</p>
-                            <p class="text-xs text-slate-500 mt-2">大約需要 5-10 秒鐘，請稍等一下下喔！</p>
-                        </div>
-
-                        <!-- 成功生成顯示圖片 -->
-                        <div id="result-state" class="hidden w-full h-full relative group">
-                            <img id="generated-image" class="w-full h-full object-cover rounded-xl" src="" alt="聖誕卡片">
-                            
-                            <!-- 可調自訂祝賀語 overlay -->
-                            <div id="card-text-overlay" class="absolute bottom-4 left-4 right-4 bg-red-600/85 backdrop-blur-md text-white font-pop p-3 rounded-2xl text-center shadow-lg border border-yellow-300">
-                                <span id="overlay-text" class="text-base sm:text-lg font-extrabold tracking-wider">祝你 聖誕快樂！ Merry Christmas!</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- 祝賀語與下載/電郵工具列 -->
-                    <div id="card-tools" class="mt-4 space-y-3 hidden">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-600 mb-1 text-left">選擇或輸入卡片祝福語：</label>
-                            <select id="greeting-select" onchange="updateGreeting()" class="w-full p-2 text-sm bg-slate-50 border-2 border-slate-200 rounded-xl font-bold text-slate-700">
-                                <option value="祝你 聖誕快樂！ Merry Christmas!">🎄 祝你 聖誕快樂！ Merry Christmas!</option>
-                                <option value="願你天天開心，聖誕平安！">⭐ 願你天天開心，聖誕平安！</option>
-                                <option value="送你滿滿的聖誕禮物與祝福！">🎁 送你滿滿的聖誕禮物與祝福！</option>
-                                <option value="Happy Holidays! 假期快樂！">🎉 Happy Holidays! 假期快樂！</option>
-                                <option value="custom">✍️ 自訂輸入專屬祝福語...</option>
-                            </select>
-                            
-                            <!-- 自由輸入祝福語區域 -->
-                            <div id="custom-greeting-container" class="mt-2 hidden">
-                                <input type="text" id="custom-greeting-input" oninput="updateCustomGreeting()" placeholder="請輸入想寫的祝福語 (例如：祝爸爸媽媽聖誕快樂！)" class="w-full p-2 text-sm bg-amber-50 border-2 border-amber-300 rounded-xl font-bold text-slate-800 focus:outline-none focus:border-red-500">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-2">
-                            <button onclick="downloadCard()" class="btn-bounce bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow flex items-center justify-center gap-1 text-xs sm:text-sm">
-                                <i class="fa-solid fa-download"></i> 下載儲存
-                            </button>
-                            <button onclick="sendEmailModal()" class="btn-bounce bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow flex items-center justify-center gap-1 text-xs sm:text-sm">
-                                <i class="fa-solid fa-paper-plane"></i> 電郵分享
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
+                
 
             </section>
 
@@ -531,88 +440,8 @@
         </div>
     </div>
 
-    <!-- 彈出視窗 2：電郵寄送 Modal -->
-    <div id="email-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl border-4 border-blue-400 max-w-md w-full p-6 relative shadow-2xl">
-            <button onclick="closeEmailModal()" class="absolute top-4 right-4 bg-slate-200 hover:bg-slate-300 rounded-full w-10 h-10 flex items-center justify-center font-bold text-slate-700">✕</button>
-            
-            <div class="text-center mb-4">
-                <span class="text-4xl">📧</span>
-                <h2 class="text-xl font-extrabold text-blue-600 mt-2">將卡片電郵給家人或老師</h2>
-            </div>
-
-            <div class="space-y-3">
-                <div>
-                    <label class="block text-xs font-bold text-slate-600 mb-1">收件人電子郵件：</label>
-                    <input type="email" id="email-input" placeholder="parents@example.com" class="w-full p-3 border-2 border-slate-200 rounded-xl text-sm font-semibold">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-600 mb-1">想說的話：</label>
-                    <textarea id="email-message" rows="3" class="w-full p-3 border-2 border-slate-200 rounded-xl text-sm font-semibold" placeholder="聖誕快樂！這是我用 AI 魔法親手設計的卡片喔！"></textarea>
-                </div>
-            </div>
-
-            <button onclick="sendEmail()" class="w-full mt-5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow flex items-center justify-center gap-2">
-                <i class="fa-solid fa-paper-plane"></i> 開啟郵件客戶端發送
-            </button>
-        </div>
-    </div>
-
-    <!-- 彈出視窗 3：課堂魔法金鑰 (API Key) 設定 Modal -->
-    <div id="apikey-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl border-4 border-emerald-400 max-w-md w-full p-6 relative shadow-2xl">
-            <button onclick="closeApiKeyModal()" class="absolute top-4 right-4 bg-slate-200 hover:bg-slate-300 rounded-full w-10 h-10 flex items-center justify-center font-bold text-slate-700">✕</button>
-            
-            <div class="text-center mb-4">
-                <span class="text-4xl">🔑</span>
-                <h2 class="text-xl font-extrabold text-emerald-700 mt-2">輸入課堂魔法金鑰 (API Key)</h2>
-                <p class="text-xs text-slate-500 mt-1">為了保護帳號安全，金鑰只會保存在這台電腦的瀏覽器中，不會公開上傳至網路！</p>
-            </div>
-
-            <div class="space-y-3">
-                <div>
-                    <label class="block text-xs font-bold text-slate-600 mb-1">請貼上 Google AI Studio 金鑰 (AIzaSy 開頭)：</label>
-                    <input type="password" id="api-key-input" placeholder="AIzaSy..." class="w-full p-3 border-2 border-slate-300 rounded-xl text-sm font-mono focus:border-emerald-500 focus:outline-none">
-                </div>
-                <p id="apikey-status" class="text-xs font-bold text-emerald-600"></p>
-            </div>
-
-            <button onclick="saveApiKey()" class="w-full mt-5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow flex items-center justify-center gap-2">
-                <i class="fa-solid fa-check"></i> 儲存並開始使用
-            </button>
-        </div>
-    </div>
-
     <!-- 音效處理與系統邏輯 Script -->
     <script>
-        // 從瀏覽器本地儲存讀取 API Key（絕不寫死在公開程式碼中）
-        function getApiKey() {
-            return localStorage.getItem('xmas_gemini_api_key') || '';
-        }
-
-        function openApiKeyModal() {
-            document.getElementById('api-key-input').value = getApiKey();
-            document.getElementById('apikey-status').innerText = getApiKey() ? '✅ 目前已儲存金鑰' : '';
-            document.getElementById('apikey-modal').classList.remove('hidden');
-        }
-
-        function closeApiKeyModal() {
-            document.getElementById('apikey-modal').classList.add('hidden');
-        }
-
-        function saveApiKey() {
-            const val = document.getElementById('api-key-input').value.trim();
-            if (!val) {
-                document.getElementById('apikey-status').innerText = '⚠️ 請輸入有效的金鑰！';
-                return;
-            }
-            localStorage.setItem('xmas_gemini_api_key', val);
-            document.getElementById('apikey-status').innerText = '✅ 儲存成功！';
-            setTimeout(() => {
-                closeApiKeyModal();
-            }, 600);
-        }
-
         // 當前遊戲關卡狀態
         let currentStep = 1;
         const maxSteps = 5;
@@ -781,11 +610,12 @@
             recognition.start();
         }
 
-        function openExternalAI(tool) {
-            const promptText = currentEnglishPrompt || '';
-            const status = document.getElementById('external-ai-status');
+// 複製中文 Prompt
+        function copyChinesePrompt() {
+            const promptText = document.getElementById('chinese-prompt-text').innerText.trim();
+            const status = document.getElementById('copy-status');
 
-            if (!promptText.trim()) {
+            if (!promptText) {
                 status.innerText = '⚠️ 請先完成 Prompt 選擇！';
                 return;
             }
@@ -793,146 +623,19 @@
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(promptText)
                     .then(() => {
-                        status.innerText = '✅ Prompt 已複製！請貼到 AI 工具並生成圖片。';
+                        status.innerText = '✅ 中文 Prompt 已複製！請貼到 Gemini 或 Copilot 生成聖誕卡。';
                     })
                     .catch(() => {
                         status.innerText = '⚠️ 無法自動複製，請手動選取並複製 Prompt。';
                     });
             } else {
-                status.innerText = '⚠️ 此瀏覽器不支援自動複製，請手動複製 Prompt。';
+                status.innerText = '⚠️ 此瀏覽器不支援自動複製，請手動選取並複製 Prompt。';
             }
-
-            const urls = {
-                gemini: 'https://gemini.google.com/',
-                copilot: 'https://copilot.microsoft.com/'
-            };
-
-            window.open(urls[tool], '_blank', 'noopener,noreferrer');
-        }
-
-// 純淨使用 Google Gemini / Imagen API 生成卡片
-        async function generateXmasCard() {
-            const currentApiKey = getApiKey();
-            if (!currentApiKey) {
-                openApiKeyModal();
-                document.getElementById('apikey-status').innerText = '⚠️ 請先在這裡輸入課堂魔法金鑰才能畫畫喔！';
-                return;
-            }
-
-            const promptText = currentEnglishPrompt;
-            
-            document.getElementById('placeholder-state').classList.add('hidden');
-            document.getElementById('error-state').classList.add('hidden');
-            document.getElementById('result-state').classList.add('hidden');
-            document.getElementById('loading-state').classList.remove('hidden');
-            document.getElementById('generate-btn').disabled = true;
-
-            let lastErrorMessage = "未知錯誤";
-            let success = false;
-
-            const geminiModels = [
-                'gemini-2.5-flash-image',
-                'gemini-3.1-flash-image'
-            ];
-
-            const geminiPayload = {
-                contents: [{
-                    role: 'user',
-                    parts: [{ text: promptText }]
-                }],
-                generationConfig: {
-                    responseModalities: ['IMAGE']
-                }
-            };
-
-            for (const model of geminiModels) {
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${currentApiKey}`;
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(geminiPayload)
-                    });
-
-                    const result = await response.json();
-
-                    if (!response.ok) {
-                        lastErrorMessage = result?.error?.message || `HTTP 錯誤碼: ${response.status}`;
-                        if (lastErrorMessage.includes('API key not valid') || (response.status === 400 && lastErrorMessage.includes('API_KEY_INVALID'))) {
-                            break;
-                        }
-                        continue;
-                    }
-
-                    const part = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
-                    if (part && part.inlineData) {
-                        const imageUrl = `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
-                        showGeneratedImage(imageUrl);
-                        success = true;
-                        break;
-                    }
-                } catch (error) {
-                    lastErrorMessage = error.message;
-                }
-            }
-
-            if (!success && !lastErrorMessage.includes('API key not valid')) {
-                try {
-                    const imagenUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${currentApiKey}`;
-                    const imagenRes = await fetch(imagenUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            instances: [{ prompt: promptText }],
-                            parameters: { sampleCount: 1, aspectRatio: "3:4" }
-                        })
-                    });
-                    const imagenData = await imagenRes.json();
-                    if (imagenRes.ok && imagenData?.predictions?.[0]?.bytesBase64Encoded) {
-                        const imageUrl = `data:image/png;base64,${imagenData.predictions[0].bytesBase64Encoded}`;
-                        showGeneratedImage(imageUrl);
-                        success = true;
-                    } else if (imagenData?.error?.message) {
-                        lastErrorMessage = imagenData.error.message;
-                    }
-                } catch (e) {
-                    lastErrorMessage = e.message;
-                }
-            }
-
-            if (!success) {
-                document.getElementById('loading-state').classList.add('hidden');
-                document.getElementById('error-state').classList.remove('hidden');
-                document.getElementById('error-detail-text').innerText = `錯誤原因：${lastErrorMessage}`;
-            }
-
-            document.getElementById('generate-btn').disabled = false;
-        }
-
-        function showGeneratedImage(imageUrl) {
-            const imgEl = document.getElementById('generated-image');
-            imgEl.src = imageUrl;
-            document.getElementById('loading-state').classList.add('hidden');
-            document.getElementById('result-state').classList.remove('hidden');
-            document.getElementById('card-tools').classList.remove('hidden');
-            playSuccessSound();
         }
 
         // Modal 相關控制
         function openPromptGuide() { document.getElementById('guide-modal').classList.remove('hidden'); }
         function closePromptGuide() { document.getElementById('guide-modal').classList.add('hidden'); }
-        function sendEmailModal() { document.getElementById('email-modal').classList.remove('hidden'); }
-        function closeEmailModal() { document.getElementById('email-modal').classList.add('hidden'); }
-
-        function sendEmail() {
-            const email = document.getElementById('email-input').value;
-            const message = document.getElementById('email-message').value;
-            const greeting = document.getElementById('overlay-text').innerText;
-            const body = encodeURIComponent(`${message}\n\n卡片祝福語：${greeting}\n\n（請下載附上您創作的專屬聖誕卡片！）`);
-            window.location.href = `mailto:${email}?subject=${encodeURIComponent('🎄 送你一張特別的聖誕卡片！')}&body=${body}`;
-            closeEmailModal();
-        }
-
         // 文字轉語音 TTS
         function speakHelperText() {
             if ('speechSynthesis' in window) {
@@ -961,75 +664,6 @@
             } catch (e) {}
         }
 
-        function updateGreeting() {
-            const select = document.getElementById('greeting-select');
-            const customContainer = document.getElementById('custom-greeting-container');
-            const customInput = document.getElementById('custom-greeting-input');
-            
-            if (select.value === 'custom') {
-                customContainer.classList.remove('hidden');
-                customInput.focus();
-                updateCustomGreeting();
-            } else {
-                customContainer.classList.add('hidden');
-                document.getElementById('overlay-text').innerText = select.value;
-            }
-        }
-
-        function updateCustomGreeting() {
-            const customInput = document.getElementById('custom-greeting-input');
-            const text = customInput.value.trim() || '祝你 聖誕快樂！';
-            document.getElementById('overlay-text').innerText = text;
-        }
-
-        function playSuccessSound() {
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const notes = [523.25, 659.25, 783.99, 1046.50];
-                notes.forEach((freq, i) => {
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.1);
-                    gain.gain.setValueAtTime(0.1, ctx.currentTime + i * 0.1);
-                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.1 + 0.3);
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-                    osc.start(ctx.currentTime + i * 0.1);
-                    osc.stop(ctx.currentTime + i * 0.1 + 0.3);
-                });
-            } catch(e) {}
-        }
-
-        function downloadCard() {
-            const img = document.getElementById('generated-image');
-            const greetingText = document.getElementById('overlay-text').innerText;
-
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-
-            canvas.width = 800;
-            canvas.height = 1000;
-
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = 'rgba(230, 57, 70, 0.9)';
-            ctx.fillRect(40, canvas.height - 140, canvas.width - 80, 100);
-
-            ctx.strokeStyle = '#FFD166';
-            ctx.lineWidth = 6;
-            ctx.strokeRect(40, canvas.height - 140, canvas.width - 80, 100);
-
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = 'bold 32px "Noto Sans TC", sans-serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(greetingText, canvas.width / 2, canvas.height - 90);
-
-            const link = document.createElement('a');
-            link.download = '我的專屬聖誕卡片.png';
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-        }
     </script>
 </body>
 </html>
